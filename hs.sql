@@ -18,3 +18,10 @@ CREATE TABLE `t_customer_account` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `userName1` (`userName`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `t_customer_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `ip` varchar(40) DEFAULT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `userName1` (`userName`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8;

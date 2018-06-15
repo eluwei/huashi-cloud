@@ -18,6 +18,8 @@ public class ResultData {
     private static String SUCCESS_INFO = "请求成功";
     private static String NOPERMISSIONS_CODE = "-2";
     private static String NOPERMISSIONS_INFO = "无操作权限";
+    private static String NOLOGIN_CODE = "-3";
+    private static String NOLOGIN_INFO = "请先登录";
 
     private String code;
     private String info;
@@ -66,6 +68,13 @@ public class ResultData {
         ResultData appJsonData = new ResultData();
         appJsonData.code = ResultData.NOAUTH_CODE;
         appJsonData.info = ResultData.NOAUTH_INFO;
+        return appJsonData;
+    }
+
+    public static ResultData NOLOGIN() {
+        ResultData appJsonData = new ResultData();
+        appJsonData.code = ResultData.NOLOGIN_CODE;
+        appJsonData.info = ResultData.NOLOGIN_INFO;
         return appJsonData;
     }
 

@@ -120,6 +120,7 @@ public class BaseDomain {
             f.setAccessible(true);
             f.set(obj, value);
         } catch (Exception e) {
+            e.printStackTrace();
             String err = "assign field " + field + " to " + value + " error.";
             throw new FieldAccessException(err, new FieldAccessExceptionResult(ResultState.FIELDACCESS_ERROR.name(), err));
         }

@@ -29,6 +29,10 @@ public final class StringUtils {
 
     private static final String EMPTY = "";
 
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
+
+    private static Pattern humpPattern = Pattern.compile("[A-Z]");
+
     /**
      * 判断是否为null或空字符串。如果不为null，在判断是否为空字符串之前会调用trim()。
      *
@@ -41,7 +45,7 @@ public final class StringUtils {
     /**
      *
      * ghuan
-     * @param str
+     * @param object
      * @return
      */
     public static boolean isNullOrEmpty(Object object) {
@@ -403,7 +407,7 @@ public final class StringUtils {
     }
     /**
      * ghuan
-     * @param str
+     * @param object
      * @return
      */
     public static boolean isNotNullAndEmpty(Object object) {
@@ -536,6 +540,36 @@ public final class StringUtils {
     public static String simpleEncodeUrl(String url) throws Exception {
         String t_url = URLEncoder.encode(url,"utf-8");
         return t_url.replaceAll("%2F",  "/").replaceAll("\\+", "%20");
+    }
+
+    /**下划线转驼峰*/
+    public static String lineToHump(String str){
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while(matcher.find()){
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**驼峰转下划线(简单写法，效率低于{@link #humpToLine2(String)})*/
+    public static String humpToLine(String str){
+        return str.replaceAll("[A-Z]", "_$0").toLowerCase();
+    }
+
+
+
+    /**驼峰转下划线,效率比上面高*/
+    public static String humpToLine2(String str){
+        Matcher matcher = humpPattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while(matcher.find()){
+            matcher.appendReplacement(sb, "_"+matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
 

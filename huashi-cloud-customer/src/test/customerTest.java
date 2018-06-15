@@ -1,3 +1,5 @@
+import com.huashi.cloud.common.qiniu.QiniuStorage;
+import com.huashi.cloud.common.utils.FileUtil;
 import com.huashi.cloud.customer.ApplicationHuaShiCloudCustomer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,11 +21,29 @@ public class customerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
+    @Autowired
+    private QiniuStorage qiniuUtil;
+
 
     @Test
     public void getparamsUniqueMap() throws Exception {
         Map<String, Object> params = new HashMap<>();
         Object result = testRestTemplate.getForObject("/customer/base/list", Object.class, params);
         System.out.println(result);
+    }
+
+    @Test
+    public void uplodPicture() throws Exception {
+        //测试上传图片
+        byte[] buff = FileUtil.getBytesByFile("C:/Users/Administrator/Desktop/花食.jpg");
+        String key = qiniuUtil.uploadImage(buff, "brand" , "huashi");
+        System.out.println("key = " + key);
+
+
+        //测试下载图片
+        String url = qiniuUtil.getUrl(key);
+        System.out.println("url = " + url);
+
+
     }
 }

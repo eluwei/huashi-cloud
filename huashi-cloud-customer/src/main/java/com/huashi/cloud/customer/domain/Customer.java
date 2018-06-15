@@ -8,9 +8,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "t_customer_account")
 public class Customer {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue(generator = "paymentableGenerator")
+    @GenericGenerator(name = "paymentableGenerator", strategy = "native")
+    private Integer id;
 
     @Column(name = "userType", length = 10, nullable = true)
     private String userType;
@@ -57,11 +57,11 @@ public class Customer {
     @Column(name = "isVerified", length = 1, nullable = true)
     private Integer isVerified;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

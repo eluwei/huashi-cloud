@@ -40,6 +40,8 @@ public class MD5Utils {
         return md5StrBuff.toString();
     }
 
+
+
     public static  void main(String[] args){
         System.out.println("MD5签名：" + encode("zhaoyuan"));
     }

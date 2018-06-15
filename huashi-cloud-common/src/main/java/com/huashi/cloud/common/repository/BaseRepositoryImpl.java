@@ -4,10 +4,15 @@ import com.huashi.cloud.common.domain.BaseDomain;
 import com.huashi.cloud.common.exception.FieldAccessException;
 import com.huashi.cloud.common.exception.result.FieldAccessExceptionResult;
 import com.huashi.cloud.common.page.PageBean;
+import com.huashi.cloud.common.qiniu.QiniuStorage;
 import com.huashi.cloud.common.result.ResultState;
 import com.huashi.cloud.common.utils.ConvertUtil;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.SQLQuery;
+import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -23,10 +28,13 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 
     private final EntityManager entityManager;
 
+    private QiniuStorage qiniuUtil;
+
     //父类没有不带参数的构造方法，这里手动构造父类
-    public BaseRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
+    public BaseRepositoryImpl(Class<T> domainClass, EntityManager entityManager, QiniuStorage qiniuUtil) {
         super(domainClass, entityManager);
         this.entityManager = entityManager;
+        this.qiniuUtil = qiniuUtil;
     }
 
 
@@ -246,6 +254,10 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
             }
             for(BaseDomain.ColumnField field: baseDomain.getColumnFields()){
                 Object value = item.get(field.getName());
+                if(value == null) //驼峰转下滑线
+                    value = item.get(com.huashi.cloud.common.utils.StringUtils.humpToLine2(field.getName()));
+                if(value != null && field.getName().indexOf("Url") >= 0)
+                    value = qiniuUtil.getUrl(value.toString());
                 value = ConvertUtil.castFromObject(value, field.getType());
                 baseDomain.setFieldValue(clasz, field.getName(), obj, value);
             }
@@ -264,6 +276,8 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
                 query.setParameter(i + 1, args[i]);
             }
         }
+        //返回map集合
+        query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         return query.getResultList();
     }
 

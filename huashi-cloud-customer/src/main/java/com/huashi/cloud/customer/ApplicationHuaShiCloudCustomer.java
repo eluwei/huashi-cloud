@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.huashi.cloud"})
 @EnableEurekaClient
 @EnableJpaRepositories(basePackages = {"com.huashi.cloud"}, repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 public class ApplicationHuaShiCloudCustomer {
