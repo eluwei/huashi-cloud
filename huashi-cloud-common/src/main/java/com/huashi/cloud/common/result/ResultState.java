@@ -11,9 +11,15 @@ public enum ResultState {
 
     private int stateCode;
     private String description;
+
+
     ResultState(int stateCode, String description){
         this.stateCode = stateCode;
         this.description = description;
+    }
+
+    public int getStateCode() {
+        return stateCode;
     }
 
     @Override

@@ -75,11 +75,8 @@ public class EncryptUtils  {
             password = "";
         }
         if (strict && (salt != null)) {
-            if ((salt.toString().lastIndexOf("{") != -1)
-                    || (salt.toString().lastIndexOf("}") != -1)) {
-                throw new IllegalArgumentException(
-                        "Cannot use { or } in salt.toString()");
-            }
+            if ((salt.toString().lastIndexOf("{") != -1) || (salt.toString().lastIndexOf("}") != -1)) {
+                throw new IllegalArgumentException("Cannot use { or } in salt.toString()"); }
         }
         if ((salt == null) || "".equals(salt)) {
             return password;

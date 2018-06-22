@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by konghao on 2016/12/7.
+ * Created by lisngkun on 2016/12/7.
  */
 @NoRepositoryBean
 public interface BaseRepository<T,ID extends Serializable> extends JpaRepository<T,ID> {
@@ -55,9 +55,6 @@ public interface BaseRepository<T,ID extends Serializable> extends JpaRepository
      * @return 第一个对象
      */
      <T> T findFirst(Class<T> clasz, String conditions, Object[] args, String order) throws FieldAccessException;
-
-
-
 
     /**
      * 查找第一个对象，找到时返回对象，找不到返回null。

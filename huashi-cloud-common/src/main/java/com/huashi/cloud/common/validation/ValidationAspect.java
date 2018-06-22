@@ -3,11 +3,13 @@ package com.huashi.cloud.common.validation;
 import com.huashi.cloud.common.exception.ValidationException;
 import com.huashi.cloud.common.exception.result.ValidationExceptionResult;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -20,6 +22,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+@Aspect
+@Component
 public class ValidationAspect {
     ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

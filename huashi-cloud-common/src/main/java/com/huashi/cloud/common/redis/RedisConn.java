@@ -13,6 +13,9 @@ public class RedisConn {
     @Value("${spring.redis.port}")
     private int port;
 
+    @Value("${spring.redis.password}")
+    private String password;
+
     @Value("${spring.redis.timeout}")
     private int timeout;
 
@@ -40,4 +43,11 @@ public class RedisConn {
         this.timeout = timeout;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

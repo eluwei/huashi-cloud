@@ -1,5 +1,6 @@
 package com.huashi.cloud.customer.controller;
 
+import com.huashi.cloud.common.page.PageBean;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,22 +13,19 @@ public class BaseController {
 
     /**
      * 获取分页的实体
-     * @param params  传入的map集合
+     * @param page  传入的map集合
      * @return
      */
-//    protected PageBean getPageBean(Map<String, Object> params){
-//        Integer currentPage = 1,pageSize = 10;
-//        if(params.get("page") != null){
-//            currentPage = Integer.valueOf(params.get("page").toString()) ;
-//        }
-//        if(params.get("pageSize") != null){
-//            pageSize = Integer.valueOf(params.get("pageSize").toString());
-//        }
-//
-//        PageBean pageBean = new PageBean();
-//        pageBean.setCurrentPage(currentPage);
-//        pageBean.setPageSize(pageSize);
-//        return pageBean;
-//    }
-
+    protected PageBean getPageBean(Integer page, Integer pageSize){
+        if(page == null){
+            page = 1 ;
+        }
+        if(pageSize == null){
+            pageSize = 10;
+        }
+        PageBean pageBean = new PageBean();
+        pageBean.setCurrentPage(page);
+        pageBean.setPageSize(pageSize);
+        return pageBean;
+    }
 }

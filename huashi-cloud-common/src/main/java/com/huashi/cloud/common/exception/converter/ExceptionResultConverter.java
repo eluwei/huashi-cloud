@@ -23,7 +23,7 @@ public class ExceptionResultConverter implements ExceptionConverter<ResultData> 
         Object detail = exceptionResult.getDetail();
         if (ResultState.BUSINESS_ERROR.equals(state) && detail instanceof BusinessExceptionResult)
             resultData.setInfo(((BusinessExceptionResult) detail).getMessage());
-        if (ResultState.PARAMETER_INVALID.equals(state) && detail instanceof ValidationException)
+        if (ResultState.PARAMETER_INVALID.equals(state) && detail instanceof ValidationExceptionResult)
             resultData.setInfo(((ValidationExceptionResult) detail).getMessage());
         return resultData;
     }

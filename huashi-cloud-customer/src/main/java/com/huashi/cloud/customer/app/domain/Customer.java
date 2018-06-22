@@ -1,4 +1,4 @@
-package com.huashi.cloud.customer.domain;
+package com.huashi.cloud.customer.app.domain;
 
 import javax.persistence.*;
 
