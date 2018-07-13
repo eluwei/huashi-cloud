@@ -4,11 +4,12 @@ import com.huashi.cloud.common.page.PageBean;
 import com.huashi.cloud.common.qiniu.QiniuStorage;
 import com.huashi.cloud.common.redis.RedisStorage;
 import com.huashi.cloud.common.utils.EncryptUtils;
-import com.huashi.cloud.common.utils.FileUtil;
 import com.huashi.cloud.common.utils.StringUtils;
 import com.huashi.cloud.common.utils.UUIDGenerator;
 import com.huashi.cloud.customer.admin.domain.Admin;
 import com.huashi.cloud.customer.app.domain.Channel;
+import com.huashi.cloud.customer.common.domain.Goods;
+import com.huashi.cloud.customer.repository.CloudAdminGoodsRepository;
 import com.huashi.cloud.customer.repository.CloudAdminUserRepository;
 import com.huashi.cloud.customer.repository.CloudChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class AdminService {
     protected CloudChannelRepository cloudChannelRepository;
 
     @Autowired
+    protected CloudAdminGoodsRepository cloudAdminGoodsRepository;
+
+    @Autowired
     private QiniuStorage qiniuUtil;
 
 
@@ -53,8 +57,6 @@ public class AdminService {
             cloudAdminUserRepository.save(admin);
         }
         return handLoginInfo(admin, true);
-
-
     }
 
     /**
@@ -85,7 +87,6 @@ public class AdminService {
         userInfo.put("userName", admin.getUserName());
         userInfo.put("avatar", admin.getAvatar());
         userInfo.put("admin_role_id", admin.getAdminRoleId());
-
         //记录redis
         addUserSessionInRedis(admin.getId(), sessionId);
         return userInfo;
@@ -102,6 +103,28 @@ public class AdminService {
             return cloudAdminUserRepository.find(Channel.class,null, null, pageBean);
     }
 
+
+    /**
+     * 管理后台 获取商品列表
+     * @return
+     */
+    public Object getGoodsList(String name, PageBean pageBean) {
+        if(StringUtils.isNotEmpty(name))
+            return cloudAdminGoodsRepository.find(Goods.class,"name like ?", new Object[]{ "%" + name + "%" }, pageBean);
+        else
+            return cloudAdminGoodsRepository.find(Goods.class,null, null, pageBean);
+    }
+
+
+    /**
+     * 管理后台 根据id获取商品详情
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Goods getGoodsInfo(Integer id){
+        return cloudAdminGoodsRepository.find(Goods.class, id);
+    }
 
     /**
      * 管理后台 获取首页分类详情

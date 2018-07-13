@@ -71,6 +71,22 @@ public class AdminBaseController extends BaseController {
         return ResultData.DATA(adminService.onlineChannelById(id, online));
     }
 
+    /**
+     * 管理后台 获取商品列表
+     */
+    @RequestMapping(value = "/goods/goodsList", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public Object getGoodList(String name, Integer page, Integer pageSize) throws Exception{
+        PageBean pageBean = getPageBean(page, pageSize);
+        return ResultData.DATA(adminService.getGoodsList(name, pageBean));
+    }
+
+    /**
+     * 管理后台 根据id获取商品详情
+     */
+    @RequestMapping(value = "/goods/getGoodsInfo", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public Object getGoodsInfo(@NotNull Integer id) throws Exception{
+        return ResultData.DATA(adminService.getGoodsInfo(id));
+    }
 
 
 
