@@ -125,6 +125,7 @@ public class AdminService {
      * @throws Exception
      */
     public Goods getGoodsInfo(Integer id){
+
         return cloudAdminGoodsRepository.find(Goods.class, id);
     }
 
