@@ -97,10 +97,11 @@ public class AdminService {
      * @return
      */
     public Object listChannel(String name, PageBean pageBean) {
-        if(StringUtils.isNotEmpty(name))
-            return cloudAdminUserRepository.find(Channel.class,"name like ?", new Object[]{ "%" + name + "%" }, pageBean);
-        else
-            return cloudAdminUserRepository.find(Channel.class,null, null, pageBean);
+        if(StringUtils.isNotEmpty(name)) {
+            return cloudAdminUserRepository.find(Channel.class, "name like ?", new Object[]{"%" + name + "%"}, pageBean);
+        }else {
+            return cloudAdminUserRepository.find(Channel.class, null, null, pageBean);
+        }
     }
 
 
@@ -109,10 +110,11 @@ public class AdminService {
      * @return
      */
     public Object getGoodsList(String name, PageBean pageBean) {
-        if(StringUtils.isNotEmpty(name))
-            return cloudAdminGoodsRepository.find(Goods.class,"name like ?", new Object[]{ "%" + name + "%" }, pageBean);
-        else
-            return cloudAdminGoodsRepository.find(Goods.class,null, null, pageBean);
+        if(StringUtils.isNotEmpty(name)) {
+            return cloudAdminGoodsRepository.find(Goods.class, "name like ?", new Object[]{"%" + name + "%"}, pageBean);
+        }else {
+            return cloudAdminGoodsRepository.find(Goods.class, null, null, pageBean);
+        }
     }
 
 

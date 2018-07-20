@@ -27,8 +27,9 @@ public class QiniuWrapper {
 
 
     private Auth getAuthInstance () {
-        if(auth == null)
-              auth = Auth.create(qiniuConn.getAccesskey(), qiniuConn.getSecretkey());
+        if(auth == null){
+            auth = Auth.create(qiniuConn.getAccesskey(), qiniuConn.getSecretkey());
+        }
         return auth;
     }
 

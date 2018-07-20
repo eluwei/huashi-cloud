@@ -40,7 +40,9 @@ public class AppBaseController extends BaseController{
     @RequestMapping(value = "/loginByWeixin", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public Object loginByWeixin(@NotNull String code, @NotNull String userInfo){
         JSONObject weixinUserInfo = WeixinLoginUtils.getWeixinUserInfo(code, userInfo);
-        if(weixinUserInfo == null) throw new BusinessException("微信登录异常!", new BusinessExceptionResult(ResultState.BUSINESS_ERROR.name(), "微信登录异常!"));
+        if(weixinUserInfo == null){
+            throw new BusinessException("微信登录异常!", new BusinessExceptionResult(ResultState.BUSINESS_ERROR.name(), "微信登录异常!"));
+        }
         return ResultData.SUCCESS();
     }
 

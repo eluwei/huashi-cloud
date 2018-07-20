@@ -14,10 +14,6 @@ import java.security.NoSuchAlgorithmException;
  *
  */
 public class EncryptUtils  {
-    public static String encodePassword(String rawPass) {
-        return encodePassword(rawPass, defaultSalt);
-    }
-
     public static String encodePassword(String rawPass, String salt) {
         String saltedPass = mergePasswordAndSalt(rawPass, salt, false);
         MessageDigest messageDigest = getMessageDigest();
@@ -88,7 +84,7 @@ public class EncryptUtils  {
     /**
      * 混淆码。防止破解。
      */
-    private static String defaultSalt;
+    private String defaultSalt;
 
     /**
      * 获得混淆码

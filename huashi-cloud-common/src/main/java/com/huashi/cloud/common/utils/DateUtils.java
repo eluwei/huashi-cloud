@@ -50,8 +50,9 @@ public class DateUtils {
      */
     public static java.sql.Date parserShortDate(String shortDateStr,
                                                 String format) {
-        if (StringUtils.isNullOrEmpty(shortDateStr))
+        if (StringUtils.isNullOrEmpty(shortDateStr)) {
             return null;
+        }
         DateFormat dateFormate = new SimpleDateFormat(format);
         try {
             Date date = dateFormate.parse(shortDateStr);
@@ -71,8 +72,9 @@ public class DateUtils {
      * @author jianguo.xu
      */
     public static Date parserDate(String dateStr, String format) {
-        if (StringUtils.isNullOrEmpty(dateStr))
+        if (StringUtils.isNullOrEmpty(dateStr)) {
             return null;
+        }
         DateFormat dateFormate = new SimpleDateFormat(format);
         try {
             Date date = dateFormate.parse(dateStr);
@@ -121,30 +123,31 @@ public class DateUtils {
     private static int calField(TimeUnit timeUnit) {
 
         int field = 0;
-        if (timeUnit == TimeUnit.YEAR)
+        if (timeUnit == TimeUnit.YEAR) {
             field = Calendar.YEAR;
-        else if (timeUnit == TimeUnit.MONTH)
+        }else if (timeUnit == TimeUnit.MONTH) {
             field = Calendar.MONTH;
-        else if (timeUnit == TimeUnit.WEEK_OF_YEAR)
+        }else if (timeUnit == TimeUnit.WEEK_OF_YEAR) {
             field = Calendar.WEEK_OF_YEAR;
-        else if (timeUnit == TimeUnit.WEEK_OF_MONTH)
+        }else if (timeUnit == TimeUnit.WEEK_OF_MONTH) {
             field = Calendar.WEEK_OF_MONTH;
-        else if (timeUnit == TimeUnit.DAY_OF_WEEK)
+        }else if (timeUnit == TimeUnit.DAY_OF_WEEK) {
             field = Calendar.DAY_OF_WEEK;
-        else if (timeUnit == TimeUnit.DAYS)
+        }else if (timeUnit == TimeUnit.DAYS) {
             field = Calendar.DAY_OF_YEAR;
-        else if (timeUnit == TimeUnit.DAY_OF_MONTH)
+        }else if (timeUnit == TimeUnit.DAY_OF_MONTH) {
             field = Calendar.DAY_OF_MONTH;
-        else if (timeUnit == TimeUnit.HOURS)
+        }else if (timeUnit == TimeUnit.HOURS) {
             field = Calendar.HOUR_OF_DAY;
-        else if (timeUnit == TimeUnit.MINUTES)
+        }else if (timeUnit == TimeUnit.MINUTES) {
             field = Calendar.MINUTE;
-        else if (timeUnit == TimeUnit.SECONDS)
+        }else if (timeUnit == TimeUnit.SECONDS) {
             field = Calendar.SECOND;
-        else if (timeUnit == TimeUnit.MILLISECONDS)
+        } else if (timeUnit == TimeUnit.MILLISECONDS) {
             field = Calendar.MILLISECOND;
-        else
+        } else {
             throw new RuntimeException("timeUnit error");
+        }
         return field;
     }
 
@@ -295,7 +298,7 @@ public class DateUtils {
      * @return
      */
     public static long getNowTime() {
-        return new Date().getTime();
+        return System.currentTimeMillis();
     }
 
     /**

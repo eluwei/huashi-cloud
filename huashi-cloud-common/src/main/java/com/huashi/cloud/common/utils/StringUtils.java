@@ -33,6 +33,8 @@ public final class StringUtils {
 
     private static Pattern humpPattern = Pattern.compile("[A-Z]");
 
+    private static final Pattern p = Pattern.compile("<script[^>]*>.*?</script>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+
     /**
      * 判断是否为null或空字符串。如果不为null，在判断是否为空字符串之前会调用trim()。
      *
@@ -59,8 +61,9 @@ public final class StringUtils {
      * @return
      */
     public static String escapeHtml(String src) {
-        if (src == null)
+        if (src == null) {
             return null;
+        }
         return src.replaceAll("<[a-zA-Z/][.[^<]]*>", "");
     }
 
@@ -71,8 +74,9 @@ public final class StringUtils {
      * @return
      */
     public static String escapeBlank(String src) {
-        if (src == null)
+        if (src == null) {
             return null;
+        }
         return src.replaceAll("&[a-zA-Z]+;", "");
     }
 
@@ -83,8 +87,9 @@ public final class StringUtils {
      * @return
      */
     public static String escapeImg(String src) {
-        if (src == null)
+        if (src == null) {
             return null;
+        }
         return src.replaceAll("<img.*/>", "");
     }
 
@@ -109,24 +114,26 @@ public final class StringUtils {
      */
     public static String repeat(String src, int times) {
         StringBuffer buffer = new StringBuffer(src);
-        for (int i = 0; i < times - 1; i++)
+        for (int i = 0; i < times - 1; i++) {
             buffer.append(src);
+        }
         return buffer.toString();
     }
 
     public static String[] printSegmentation(String str, int numberOfCharacters) {
         double number0 = str.length() / numberOfCharacters;
         int quantity;
-        if (str.length() % numberOfCharacters == 0)
+        if (str.length() % numberOfCharacters == 0) {
             quantity = (int) number0;
-        else
+        }else {
             quantity = (int) (number0 + 1);
+        }
         String[] results = new String[quantity];
         for (int i = 0; i < quantity; i++) {
             String str0;
-            if (i == quantity - 1)
+            if (i == quantity - 1) {
                 str0 = str;
-            else {
+            }else {
                 str0 = str.substring(0, numberOfCharacters);
                 str = str.substring(numberOfCharacters);
             }
@@ -143,7 +150,6 @@ public final class StringUtils {
      */
     public static String removeScript(String str) {
         if (!StringUtils.isNullOrEmpty(str)) {
-            Pattern p = Pattern.compile("<script[^>]*>.*?</script>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
             Matcher matcher = p.matcher(str);
             return matcher.replaceAll("");
         }
@@ -157,8 +163,9 @@ public final class StringUtils {
      * @return
      */
     public static String escapeSpecialLabel(String src) {
-        if (isNullOrEmpty(src))
+        if (isNullOrEmpty(src)) {
             return null;
+        }
         return src.replaceAll("&", "&amp;").replaceAll("\\<", "&lt;").replaceAll("\\>", "&gt;")
                 .replaceAll("\r\n", "<br/>").replaceAll("\n", "<br/>").replaceAll(" ", "&nbsp;")
                 .replaceAll("\"", "&quot;");
@@ -170,12 +177,14 @@ public final class StringUtils {
      * @param processBracket 是否处理尖括号'<' 和'>'
      */
     public static String unEscapeSpecialLabel(String src, boolean processBracket) {
-        if (isNullOrEmpty(src))
+        if (isNullOrEmpty(src)) {
             return null;
+        }
         src = src.replaceAll("(?i)&amp;", "&").replaceAll("(?i)<br\\s*/?\\s*>", "\r\n").replaceAll("(?i)&nbsp;", " ")
                 .replaceAll("(?i)&quot;", "\"");
-        if (processBracket)
+        if (processBracket) {
             src = src.replaceAll("(?i)&lt;", "\\<").replaceAll("(?i)&gt;", "\\>");
+        }
         return src;
     }
 
@@ -194,15 +203,18 @@ public final class StringUtils {
         String[] parameterPairs = queryString.split("&");
         for (int i = 0; i < parameterPairs.length; i++) {
             String[] kvs = parameterPairs[i].split("=");
-            if (kvs[0].equals(parameter))
+            if (kvs[0].equals(parameter)) {
                 continue;
+            }
             buffer.append(kvs[0]);
-            if (kvs.length == 2)
+            if (kvs.length == 2) {
                 buffer.append("=").append(kvs[1]);
+            }
             buffer.append("&");
         }
-        if (buffer.length() > 0)
+        if (buffer.length() > 0) {
             buffer.deleteCharAt(buffer.length() - 1);
+        }
         return buffer.toString();
     }
 
@@ -225,18 +237,21 @@ public final class StringUtils {
     public static String deleteByteLength(String inputSrc, int startByteIndex, int endByteIndex) {
         StringBuilder sb = new StringBuilder(inputSrc);
         int inputByteLength = inputSrc.getBytes().length;
-        if (startByteIndex < 0)
+        if (startByteIndex < 0) {
             startByteIndex = 0;
-        if (endByteIndex > inputByteLength)
+        }
+        if (endByteIndex > inputByteLength) {
             endByteIndex = inputByteLength;
+        }
         char[] inputChars = inputSrc.toCharArray();
         int startByteLength = 0;
         int startIndex = 0;
         for (Character c : inputChars) {
             int charByteLength = c.toString().getBytes().length;
             startByteLength += charByteLength;
-            if (startByteLength > startByteIndex)
+            if (startByteLength > startByteIndex) {
                 break;
+            }
             startIndex++;
         }
         int endByteLength = 0;
@@ -244,8 +259,9 @@ public final class StringUtils {
         for (Character c : inputChars) {
             int charByteLength = c.toString().getBytes().length;
             endByteLength += charByteLength;
-            if (endByteLength > endByteIndex)
+            if (endByteLength > endByteIndex) {
                 break;
+            }
             endIndex++;
         }
         return sb.delete(startIndex, endIndex).toString();
@@ -266,11 +282,13 @@ public final class StringUtils {
      * @return
      */
     public static boolean containsChinese(String str) {
-        if (isNullOrEmpty(str))
+        if (isNullOrEmpty(str)) {
             return false;
+        }
         for (int i = 0; i < str.length(); i++) {
-            if (isChinese(str.charAt(i)))
+            if (isChinese(str.charAt(i))) {
                 return true;
+            }
         }
         return false;
     }
@@ -352,8 +370,9 @@ public final class StringUtils {
     public static boolean isDouble(String value) {
         try {
             Double.parseDouble(value);
-            if (value.contains("."))
+            if (value.contains(".")) {
                 return true;
+            }
             return false;
         } catch (NumberFormatException e) {
             //e.printStackTrace();
@@ -521,8 +540,9 @@ public final class StringUtils {
      * @return
      */
     public static String delZeroForDecimal(Number num) {
-        if (null == num)
+        if (null == num) {
             return null;
+        }
         String numStr = String.valueOf(num);
         if(numStr.indexOf(".") > 0){
             numStr = numStr.replaceAll("0+?$", "");//去掉后面无用的零

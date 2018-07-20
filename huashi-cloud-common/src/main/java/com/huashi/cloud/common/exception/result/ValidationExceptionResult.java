@@ -53,8 +53,9 @@ public class ValidationExceptionResult {
     }
 
     public String getMessage(){
-        if (null != errors && errors.size() > 0)
+        if (null != errors && errors.size() > 0) {
             return errors.get(0).getMessage();
+        }
         return null;
     }
 }

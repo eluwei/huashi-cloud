@@ -19,7 +19,7 @@ public class RedisStorage {
     @SuppressWarnings("rawtypes")
     @Autowired
     private RedisTemplate redisTemplate;
-    private static final Long SLEEP_TIME = 100l;
+    private static final Long SLEEP_TIME = 100L;
 
     /**
      * 批量删除对应的value
@@ -40,8 +40,9 @@ public class RedisStorage {
     @SuppressWarnings("unchecked")
     public void removePattern(final String pattern) {
         Set<Serializable> keys = redisTemplate.keys(pattern);
-        if (keys.size() > 0)
+        if (keys.size() > 0) {
             redisTemplate.delete(keys);
+        }
     }
 
     /**
@@ -140,7 +141,7 @@ public class RedisStorage {
      *            超时时间，毫秒为单位
      */
     public Boolean distributeLock(final String key, Long expireTime) {
-        Long lockTimeOut = 0l;
+        Long lockTimeOut = 0L;
         while (true) { // 循环获取锁
             if (lockTimeOut >= expireTime) {
                 return false;

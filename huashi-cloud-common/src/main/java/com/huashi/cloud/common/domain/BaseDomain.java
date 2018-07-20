@@ -32,8 +32,9 @@ public class BaseDomain {
     static Map<Class<?>, BaseDomain> map;
 
     static {
-        if (map == null)
+        if (map == null) {
             map = new HashMap();
+        }
     }
 
     public static BaseDomain getBaseDomain(Class<?> clasz) {
@@ -114,7 +115,7 @@ public class BaseDomain {
         }
     }
 
-    public static void setFieldValue(Class<?> clasz, String field, Object obj, Object value) throws FieldAccessException {
+    public void setFieldValue(Class<?> clasz, String field, Object obj, Object value) throws FieldAccessException {
         try {
             Field f = clasz.getDeclaredField(field);
             f.setAccessible(true);

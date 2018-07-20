@@ -146,8 +146,9 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 
     @Override
     public <T> List<T> findBySql(Class<T> clasz, String sql, Object[] args, String order, int limit, int offset) throws FieldAccessException {
-       if(StringUtils.isNotBlank(order))
-            sql += " order by " + order;
+       if(StringUtils.isNotBlank(order)) {
+           sql += " order by " + order;
+       }
         return select(clasz, sql, args, limit, offset);
 
     }
@@ -187,8 +188,9 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 
     @Override
     public List<Map<String, Object>> getResultMap(String sql, Object[] args, String order, int limit, int offset)  throws FieldAccessException{
-        if(StringUtils.isNotBlank(order))
+        if(StringUtils.isNotBlank(order)) {
             sql += " order by " + order;
+        }
         return select(sql, args, limit, offset);
     }
 
@@ -254,10 +256,12 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
             }
             for(BaseDomain.ColumnField field: baseDomain.getColumnFields()){
                 Object value = item.get(field.getName());
-                if(value == null) //驼峰转下滑线
+                if(value == null) {//驼峰转下滑线
                     value = item.get(com.huashi.cloud.common.utils.StringUtils.humpToLine2(field.getName()));
-                if(value != null && field.getName().indexOf("Url") >= 0)
+                }
+                if(value != null && field.getName().indexOf("Url") >= 0) {
                     value = qiniuUtil.getUrl(value.toString());
+                }
                 value = ConvertUtil.castFromObject(value, field.getType());
                 baseDomain.setFieldValue(clasz, field.getName(), obj, value);
             }
@@ -334,12 +338,12 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
         newSql += ss[ss.length - 1];
         showSql += ss[ss.length - 1];
 
-        if(offset > 0)
+        if(offset > 0) {
             newSql += "offset " + offset;
-
-        if(limit > 0)
+        }
+        if(limit > 0) {
             newSql += "limit " + limit;
-
+        }
         result[0] = newSql;
         result[1] = tmpArgs.toArray();
         result[2] = showSql;
