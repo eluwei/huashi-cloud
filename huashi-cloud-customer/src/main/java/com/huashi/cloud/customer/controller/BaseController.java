@@ -1,6 +1,9 @@
 package com.huashi.cloud.customer.controller;
 
 import com.huashi.cloud.common.page.PageBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version V1.0 创建时间：17/6/26
  *          Copyright 2017 by PreTang
  */
+@RefreshScope
 @RestController
 public class BaseController {
 
@@ -27,5 +31,13 @@ public class BaseController {
         pageBean.setCurrentPage(page);
         pageBean.setPageSize(pageSize);
         return pageBean;
+    }
+
+    @Value("${pictureDomain}")
+    private String from;
+
+    @RequestMapping("/from")
+    public String from() {
+        return this.from;
     }
 }

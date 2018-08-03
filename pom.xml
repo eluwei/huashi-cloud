@@ -115,6 +115,7 @@
 		<module>huashi-cloud-config</module>
 		<module>huashi-cloud-common</module>
 		<module>huashi-cloud-customer</module>
+		<module>huashi-cloud-tool</module>
 	</modules>
 
 </project>
