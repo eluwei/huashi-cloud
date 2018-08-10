@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 /**
  * Created by liangkun on 2018-7-25.
  */
-@Component
+//@Component
 public class ReceiverService {
 
-    @RabbitListener(queues = "queue.foo")
-    public void receiveFooQueue(Foo foo) {
-        System.out.println("Received Foo<" + foo.getName() + ">");
-    }
-
-    @RabbitListener(queues = "queue.bar")
-    public void receiveBarQueue(Bar bar) {
-        System.out.println("Received Bar<" + bar.getAge() + ">");
-    }
+//    @RabbitListener(queues = "queue.foo")
+//    public void receiveFooQueue(Foo foo) {
+//        System.out.println("Received Foo<" + foo.getName() + ">");
+//    }
+//
+//    @RabbitListener(queues = "queue.bar")
+//    public void receiveBarQueue(Bar bar) {
+//        System.out.println("Received Bar<" + bar.getAge() + ">");
+//    }
 }

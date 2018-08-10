@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 /**
  * Created by liangkun on 2018-7-25.
  */
-@Component
+//@Component
 public class SenderService {
 
-    @Autowired
-    private RabbitMessagingTemplate rabbitMessagingTemplate;
-
-    public void sendFoo2Rabbitmq(final Foo foo) {
-        this.rabbitMessagingTemplate.convertAndSend("exchange", "queue.foo", foo);
-    }
-
-    public void sendBar2Rabbitmq(final Bar bar){
-        this.rabbitMessagingTemplate.convertAndSend("exchange", "queue.bar", bar);
-    }
+//    @Autowired
+//    private RabbitMessagingTemplate rabbitMessagingTemplate;
+//
+//    public void sendFoo2Rabbitmq(final Foo foo) {
+//        this.rabbitMessagingTemplate.convertAndSend("exchange", "queue.foo", foo);
+//    }
+//
+//    public void sendBar2Rabbitmq(final Bar bar){
+//        this.rabbitMessagingTemplate.convertAndSend("exchange", "queue.bar", bar);
+//    }
 }

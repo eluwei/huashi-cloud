@@ -37,8 +37,8 @@ public class ApplicationHuaShiCloudCustomer implements CommandLineRunner {
         return new XForwardedForFilter();
     }
 
-    @Autowired
-    SenderService senderService;
+//    @Autowired
+//    SenderService senderService;
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(ApplicationHuaShiCloudCustomer.class).web(true).run(args);
@@ -46,8 +46,8 @@ public class ApplicationHuaShiCloudCustomer implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        Random random = new Random();
-        senderService.sendBar2Rabbitmq(new Bar(random.nextInt()));
-        senderService.sendFoo2Rabbitmq(new Foo(UUID.randomUUID().toString()));
+//        Random random = new Random();
+//        senderService.sendBar2Rabbitmq(new Bar(random.nextInt()));
+//        senderService.sendFoo2Rabbitmq(new Foo(UUID.randomUUID().toString()));
     }
 }
