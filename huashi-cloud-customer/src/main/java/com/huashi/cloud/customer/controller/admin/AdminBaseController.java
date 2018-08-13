@@ -80,6 +80,15 @@ public class AdminBaseController extends BaseController {
         return ResultData.DATA(adminService.getGoodsList(name, pageBean));
     }
 
+
+    /**
+     * 管理后台 根据id获取商品详情
+     */
+    @RequestMapping(value = "/goods/getAllCategory", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public Object getAllCategory() throws Exception{
+        return ResultData.DATA(adminService.getAllCategory());
+    }
+
     /**
      * 管理后台 根据id获取商品详情
      */

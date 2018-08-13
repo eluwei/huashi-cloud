@@ -119,13 +119,21 @@ public class AdminService {
 
 
     /**
+     * 管理后台 获取商品所有分类
+     * @return
+     */
+    public Object getAllCategory(){
+        return cloudAdminGoodsRepository.findBySql(Goods.class, null, null, null, 0,0);
+    }
+
+
+    /**
      * 管理后台 根据id获取商品详情
      * @param id
      * @return
      * @throws Exception
      */
     public Goods getGoodsInfo(Integer id){
-
         return cloudAdminGoodsRepository.find(Goods.class, id);
     }
 

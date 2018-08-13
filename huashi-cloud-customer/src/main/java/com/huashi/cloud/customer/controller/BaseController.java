@@ -33,11 +33,11 @@ public class BaseController {
         return pageBean;
     }
 
-//    @Value("${pictureDomain}")
-//    private String from;
-//
-//    @RequestMapping("/from")
-//    public String from() {
-//        return this.from;
-//    }
+    @Value("${pictureDomain}")
+    private String from;
+
+    @RequestMapping("/from")
+    public String from() {
+        return this.from;
+    }
 }

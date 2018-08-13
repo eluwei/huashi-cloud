@@ -1,4 +1,4 @@
-package com.huashi.cloud.customer.filter;
+package com.huashi.cloud.way.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

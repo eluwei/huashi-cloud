@@ -9,7 +9,7 @@
 	<version>${project.release.version}</version>
 
 	<properties>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<project.release.version>0.1-SNAPSHOT</project.release.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
@@ -116,6 +116,7 @@
 		<module>huashi-cloud-common</module>
 		<module>huashi-cloud-customer</module>
 		<module>huashi-cloud-tool</module>
+		<module>huashi-cloud-way</module>
 	</modules>
 
 </project>

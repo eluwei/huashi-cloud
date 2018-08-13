@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by lisngkun on 2016/12/7.
+ * Created by liangkun on 2016/12/7.
  */
 @NoRepositoryBean
 public interface BaseRepository<T,ID extends Serializable> extends JpaRepository<T,ID> {
