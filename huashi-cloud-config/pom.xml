@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>huashi-cloud</artifactId>
 		<groupId>com.huashi.cloud</groupId>
-		<version>${project.release.version}</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>huashi-cloud-config</artifactId>

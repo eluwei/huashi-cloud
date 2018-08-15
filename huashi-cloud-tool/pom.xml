@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>huashi-cloud</artifactId>
 		<groupId>com.huashi.cloud</groupId>
-		<version>${project.release.version}</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>huashi-cloud-tool</artifactId>
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>com.huashi.cloud</groupId>
 			<artifactId>huashi-cloud-common</artifactId>
-			<version>${project.release.version}</version>
+			<version>0.1-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>

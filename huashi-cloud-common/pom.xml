@@ -6,7 +6,8 @@
 	<parent>
 		<artifactId>huashi-cloud</artifactId>
 		<groupId>com.huashi.cloud</groupId>
-		<version>${project.release.version}</version>
+		<version>0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>huashi-cloud-common</artifactId>
@@ -60,6 +61,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
@@ -72,10 +74,10 @@
 
 
 		<!-- 引入 ES 依赖 -->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>cn.jpush.api</groupId>
