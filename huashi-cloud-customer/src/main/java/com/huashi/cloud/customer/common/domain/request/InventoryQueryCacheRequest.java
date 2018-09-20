@@ -22,8 +22,9 @@ public class InventoryQueryCacheRequest implements Request {
         this.isForceFefresh = isForceFefresh;
     }
     @Override
-    public void process() {
+    public Object process() {
         adminService.getAllCategory();
+        return false;
     }
 
     @Override
