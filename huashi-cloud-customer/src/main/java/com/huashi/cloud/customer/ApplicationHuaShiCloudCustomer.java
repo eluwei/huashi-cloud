@@ -4,6 +4,7 @@ import com.huashi.cloud.common.repositoryFactory.BaseRepositoryFactoryBean;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(scanBasePackages = {"com.huashi.cloud"})
 @EnableEurekaClient
+@EnableCaching
 @EnableJpaRepositories(basePackages = {"com.huashi.cloud"}, repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 public class ApplicationHuaShiCloudCustomer implements CommandLineRunner {
 

@@ -13,6 +13,8 @@ import com.huashi.cloud.customer.repository.CloudAdminGoodsRepository;
 import com.huashi.cloud.customer.repository.CloudAdminUserRepository;
 import com.huashi.cloud.customer.repository.CloudChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -143,6 +145,7 @@ public class AdminService {
      * @return
      * @throws Exception
      */
+    @Cacheable(value = "Channel", key = "#id")
     public Channel getChannelInfo(Integer id){
         return cloudAdminUserRepository.find(Channel.class, id);
     }
@@ -153,18 +156,22 @@ public class AdminService {
      * @param file
      * @return
      */
+    @CachePut(key = "#channel.id", value = "channel")
     public Channel storeOrupdateChannel(Channel channel, MultipartFile file)throws Exception{
         if(file == null) {
             String nativeQiniuKey = channel.getIconUrl().substring(channel.getIconUrl().indexOf("@") + 1, channel.getIconUrl().indexOf("?"));
-            channel.setIconUrl(nativeQiniuKey); //前端传过来的路径是真实的路径，需要处理
+            //前端传过来的路径是真实的路径，需要处理
+            channel.setIconUrl(nativeQiniuKey);
             return cloudChannelRepository.save(channel);
         }
         Channel nativeChannel = getChannelInfo(channel.getId() == null ? 0 : channel.getId());
         if(nativeChannel == null) {
-            channel.setIconUrl(qiniuUtil.uploadImage(file.getBytes(), "channel", "forUse")); //新增图片
+            //新增图片
+            channel.setIconUrl(qiniuUtil.uploadImage(file.getBytes(), "channel", "forUse"));
         }else {
+            //更新图片
             String nativeQiniuKey = nativeChannel.getIconUrl().substring(nativeChannel.getIconUrl().indexOf("@") + 1, nativeChannel.getIconUrl().indexOf("?"));
-            channel.setIconUrl(qiniuUtil.uploadImage(file.getBytes(), nativeQiniuKey,true)); //更新图片
+            channel.setIconUrl(qiniuUtil.uploadImage(file.getBytes(), nativeQiniuKey,true));
         }
         return cloudChannelRepository.save(channel);
     }
