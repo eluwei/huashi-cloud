@@ -1,8 +1,11 @@
 package com.huashi.cloud.customer.service;
 
+import com.huashi.cloud.common.exception.BusinessException;
+import com.huashi.cloud.common.exception.result.BusinessExceptionResult;
 import com.huashi.cloud.common.page.PageBean;
 import com.huashi.cloud.common.qiniu.QiniuStorage;
 import com.huashi.cloud.common.redis.RedisStorage;
+import com.huashi.cloud.common.result.ExceptionTypeEnum;
 import com.huashi.cloud.common.utils.EncryptUtils;
 import com.huashi.cloud.common.utils.StringUtils;
 import com.huashi.cloud.common.utils.UUIDGenerator;
@@ -50,6 +53,9 @@ public class AdminService {
      */
     public Object userLogin(String userName, String password, String ip)throws Exception {
         Admin admin = cloudAdminUserRepository.findAdminByUserName(userName);
+        if (admin == null) {
+            throw new BusinessException(new BusinessExceptionResult(ExceptionTypeEnum.BusinessException.NO_USER_FIND_ERROR));
+        }
         String passwordMd5 = EncryptUtils.encodePassword(password, admin.getPasswordSalt());
         boolean loginBoolean = passwordMd5.equals(admin.getPassword());
         if(loginBoolean){

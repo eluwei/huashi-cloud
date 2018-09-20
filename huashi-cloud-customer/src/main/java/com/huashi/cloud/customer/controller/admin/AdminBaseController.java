@@ -4,6 +4,10 @@ package com.huashi.cloud.customer.controller.admin;
 import com.huashi.cloud.common.page.PageBean;
 import com.huashi.cloud.common.result.ResultData;
 import com.huashi.cloud.customer.app.domain.Channel;
+import com.huashi.cloud.customer.common.domain.InventoryProduct;
+import com.huashi.cloud.customer.common.domain.request.IRequestAsyncProcessBiz;
+import com.huashi.cloud.customer.common.domain.request.InventoryUpdateDBRequest;
+import com.huashi.cloud.customer.common.domain.request.Request;
 import com.huashi.cloud.customer.controller.BaseController;
 import com.huashi.cloud.customer.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,18 @@ public class AdminBaseController extends BaseController {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    private IRequestAsyncProcessBiz requestAsyncProcessBiz;
+
+
+
+    @RequestMapping("/updateDBInventoryProduct")
+    public String updateDBInventoryProduct(InventoryProduct inventoryProduct){
+        Request request = new InventoryUpdateDBRequest(inventoryProduct,adminService);
+        requestAsyncProcessBiz.process(request);
+        return"更新成功";
+    }
 
     /**
      * 客户微信小程序登录接口
@@ -96,6 +112,9 @@ public class AdminBaseController extends BaseController {
     public Object getGoodsInfo(@NotNull Integer id) throws Exception{
         return ResultData.DATA(adminService.getGoodsInfo(id));
     }
+
+
+
 
 
 
